@@ -1,775 +1,670 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Happy Birthday!</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@300;400;600;800&display=swap"
-    rel="stylesheet">
-  <style>
-    :root {
-      --pink-1: #ffd2e5;
-      --pink-2: #ffafd1;
-      --pink-3: #ff7fb3;
-      --pink-4: #ff5aa1;
-      --lavender: #c7b7ff;
-      --violet: #9a7dff;
-      --cream: #fff7fb;
-      --text: #4b2c3b;
-      --shadow: rgba(0, 0, 0, 0.12);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-    #centerName{
-      font-family: "Brush Script MT", cursive;
-    }
-    html,
-    body {
-      height: 100%;
-    }
-
-    body {
-      margin: 0;
-      background: radial-gradient(1200px 800px at 20% -10%, #ffe9f5, transparent),
-        radial-gradient(1200px 800px at 80% 110%, #f2e8ff, transparent),
-        linear-gradient(180deg, #fff 0%, #fff6fb 100%);
-      color: var(--text);
-      font-family: 'Nunito', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      overflow-x: hidden;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .visually-hidden {
-      position: absolute;
-      left: -9999px;
-    }
-
-    /* Floating balloons background */
-    .balloons {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      overflow: hidden;
-      z-index: 1;
-    }
-
-    .balloon {
-      position: absolute;
-      bottom: -120px;
-      width: 26px;
-      height: 32px;
-      background: var(--pink-2);
-      border-radius: 50% 50% 47% 53% / 57% 56% 44% 43%;
-      box-shadow: 0 10px 18px var(--shadow) inset;
-      animation: floatUp linear infinite;
-      opacity: 0.7;
-    }
-
-    .balloon:after {
-      content: '';
-      position: absolute;
-      left: 11px;
-      bottom: -10px;
-      width: 4px;
-      height: 12px;
-      background: #d399b3;
-      border-radius: 0 0 2px 2px;
-    }
-
-    @keyframes floatUp {
-      0% {
-        transform: translateY(0) translateX(0) rotate(0deg);
-        opacity: 0;
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Happy Birthday!</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Nunito:wght@300;400;600;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --pink-1: #ffd2e5;
+        --pink-2: #ffafd1;
+        --pink-3: #ff7fb3;
+        --pink-4: #ff5aa1;
+        --lavender: #c7b7ff;
+        --violet: #9a7dff;
+        --cream: #fff7fb;
+        --text: #4b2c3b;
+        --shadow: rgba(0, 0, 0, 0.12);
       }
 
-      8% {
-        opacity: 0.6;
+      * {
+        box-sizing: border-box;
+      }
+      #centerName {
+        font-family: "Brush Script MT", cursive;
+      }
+      html,
+      body {
+        height: 100%;
       }
 
-      100% {
-        transform: translateY(-120vh) translateX(30px) rotate(6deg);
-        opacity: 0.2;
-      }
-    }
-
-    /* Gift stage */
-    #stage {
-      position: relative;
-      min-height: 100vh;
-      display: grid;
-      place-items: center;
-      z-index: 2;
-      padding: 24px;
-    }
-
-    .gift {
-      position: relative;
-      width: 200px;
-      height: 180px;
-      transform: translateZ(0);
-    }
-
-    .box {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 120px;
-      background: linear-gradient(180deg, var(--pink-3), var(--pink-4));
-      border-radius: 16px;
-      box-shadow: 0 20px 40px var(--shadow);
-      overflow: hidden;
-    }
-
-    .box:before,
-    .box:after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      width: 26px;
-      transform: translateX(-50%);
-      background: repeating-linear-gradient(180deg, #fff 0 6px, #ffd9ec 6px 12px);
-    }
-
-    .lid {
-      position: absolute;
-      left: -10px;
-      right: -10px;
-      bottom: 110px;
-      height: 46px;
-      background: linear-gradient(180deg, #fff, #ffe6f3);
-      border-radius: 14px;
-      box-shadow: 0 10px 20px var(--shadow);
-      transform-origin: 50% 100%;
-      transition: transform 900ms cubic-bezier(.2, .8, .2, 1), translate 900ms;
-    }
-
-    .lid:before {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 50%;
-      width: 26px;
-      transform: translateX(-50%);
-      background: repeating-linear-gradient(180deg, var(--violet) 0 6px, var(--lavender) 6px 12px);
-      border-radius: 6px;
-    }
-
-    .ribbon-bow {
-      position: absolute;
-      left: 50%;
-      bottom: 150px;
-      width: 120px;
-      height: 60px;
-      transform: translateX(-50%);
-    }
-
-    .loop {
-      position: absolute;
-      top: 0;
-      width: 54px;
-      height: 40px;
-      border: 6px solid var(--violet);
-      border-radius: 50% 50% 0 50%;
-      border-bottom: none;
-      border-right: none;
-    }
-
-    .loop.right {
-      right: 0;
-      transform: scaleX(-1);
-    }
-
-    .sparkles {
-      position: absolute;
-      inset: -40px;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    .sparkles span {
-      position: absolute;
-      width: 6px;
-      height: 6px;
-      background: #fff;
-      border-radius: 50%;
-      box-shadow: 0 0 10px #fff, 0 0 18px var(--pink-3);
-      animation: twinkle 1.6s infinite ease-in-out;
-    }
-
-    @keyframes twinkle {
-      50% {
-        transform: scale(1.6);
-        opacity: .6;
-      }
-    }
-
-    .gift.open .lid {
-      transform: rotateX(60deg) translateY(-18px);
-    }
-
-    /* Greeting */
-    #greeting {
-      position: fixed;
-      inset: 0;
-      display: grid;
-      place-items: center;
-      background: radial-gradient(800px 500px at 50% 0%, rgba(255, 224, 244, .9), rgba(255, 255, 255, .6));
-      backdrop-filter: blur(2px);
-      z-index: 3;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 600ms ease;
-    }
-
-    #greeting.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .greet-card {
-      background: #fff;
-      border-radius: 20px;
-      padding: 24px 28px;
-      text-align: center;
-      box-shadow: 0 24px 60px var(--shadow);
-      max-width: 560px;
-    }
-
-    .title-script {
-      font-family: 'Dancing Script', cursive;
-      font-size: 48px;
-      color: var(--pink-4);
-      margin: 6px 0 2px;
-      text-shadow: 0 2px 0 #fff;
-    }
-
-    .name-line {
-      font-family: 'Dancing Script', cursive;
-      font-size: 32px;
-      color: #7b4962;
-    }
-
-    .name-line strong {
-      color: var(--violet);
-    }
-
-    .name-edit {
-      margin-top: 14px;
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-    }
-
-    .name-edit input {
-      border: 2px solid #f4c7dc;
-      border-radius: 999px;
-      padding: 10px 14px;
-      width: 220px;
-      outline: none;
-      font-size: 16px;
-      background: #fffafc;
-    }
-
-    .name-edit textarea {
-      border: 2px solid #f4c7dc;
-      border-radius: 14px;
-      padding: 10px 12px;
-      width: 100%;
-      min-height: 72px;
-      outline: none;
-      font-size: 14px;
-      resize: vertical;
-      background: #fffafc;
-    }
-
-    .btn {
-      padding: 10px 16px;
-      border-radius: 999px;
-      border: 0;
-      background: var(--violet);
-      color: #fff;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 8px 18px var(--shadow);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 12px 24px var(--shadow);
-    }
-
-    .btn.secondary {
-      background: var(--pink-3);
-    }
-
-    .btn.ghost {
-      background: #fff;
-      color: var(--violet);
-      border: 2px solid var(--violet);
-    }
-
-    .greet-actions {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
-      margin-top: 14px;
-      flex-wrap: wrap;
-    }
-
-    /* Chat typing card */
-    #chat {
-      position: relative;
-      margin: 40px auto 60px;
-      width: min(680px, calc(100% - 24px));
-      z-index: 999;
-    }
-
-    .chat-card {
-      background: #fff;
-      border-radius: 18px;
-      padding: 16px 14px 18px;
-      box-shadow: 0 16px 44px var(--shadow);
-    }
-
-    .chat-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 6px 8px 12px;
-      border-bottom: 1px dashed #f2cfe2;
-    }
-
-    .avatar {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--pink-2), var(--lavender));
-      display: grid;
-      place-items: center;
-      color: #fff;
-      font-weight: 800;
-    }
-
-    .chat-title {
-      font-weight: 800;
-      color: #8c4f6d;
-    }
-
-    .messages {
-      padding: 12px 6px 0;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .msg {
-      max-width: 86%;
-      padding: 10px 12px;
-      border-radius: 16px 16px 16px 6px;
-      background: #fff6fb;
-      color: #6b3e56;
-      box-shadow: 0 4px 12px var(--shadow);
-      line-height: 1.4;
-    }
-
-    .msg.me {
-      align-self: flex-end;
-      border-radius: 16px 16px 6px 16px;
-      background: #f2ecff;
-      color: #5a3d9e;
-    }
-
-    .typing {
-      display: inline-flex;
-      gap: 4px;
-    }
-
-    .dot {
-      width: 6px;
-      height: 6px;
-      background: #b58fb0;
-      border-radius: 50%;
-      animation: blink 1.2s infinite ease-in-out;
-    }
-
-    .dot:nth-child(2) {
-      animation-delay: .2s
-    }
-
-    .dot:nth-child(3) {
-      animation-delay: .4s
-    }
-
-    @keyframes blink {
-      50% {
-        opacity: .3;
-        transform: translateY(-2px);
-      }
-    }
-
-    /* Gallery ring */
-    #gallery {
-      position: relative;
-      height: 80vh;
-      min-height: 520px;
-      display: grid;
-      place-items: center;
-      margin-bottom: 80px;
-    }
-
-    .ring-stage {
-      position: relative;
-      width: min(90vmin, 680px);
-      height: min(90vmin, 680px);
-      perspective: 1200px;
-    }
-
-    .ring {
-      position: absolute;
-      inset: 0;
-      transform-style: preserve-3d;
-      animation: spin 20s linear infinite;
-    }
-
-    @keyframes spin {
-      from {
-        transform: rotateY(0deg);
+      body {
+        margin: 0;
+        background: radial-gradient(
+            1200px 800px at 20% -10%,
+            #ffe9f5,
+            transparent
+          ),
+          radial-gradient(1200px 800px at 80% 110%, #f2e8ff, transparent),
+          linear-gradient(180deg, #fff 0%, #fff6fb 100%);
+        color: var(--text);
+        font-family: "Nunito", system-ui, -apple-system, Segoe UI, Roboto, Arial,
+          sans-serif;
+        overflow-x: hidden;
       }
 
-      to {
-        transform: rotateY(360deg);
+      .hidden {
+        display: none !important;
       }
-    }
 
-    .ring img {
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      transform-style: preserve-3d;
-      width: 130px;
-      height: 130px;
-      object-fit: cover;
-      border-radius: 16px;
-      box-shadow: 0 12px 26px var(--shadow);
-      border: 4px solid #fff;
-      cursor: pointer;
-      transition: transform 0.3s ease;
-    }
+      .visually-hidden {
+        position: absolute;
+        left: -9999px;
+      }
 
-    .ring img:hover {
-      transform: translate3d(-50%, -50%, 0) rotateY(var(--angle)) translateZ(var(--radius)) scale(1.1);
-    }
+      /* Floating balloons background */
+      .balloons {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 1;
+      }
 
-    .center-text {
-      position: absolute;
-      left: 50%;
-      top: 10%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-    }
-
-    .center-text .script {
-      font-family: 'Dancing Script', cursive;
-      font-size: clamp(28px, 6vmin, 56px);
-      color: var(--pink-4);
-    }
-
-    .center-text .name {
-      font-family: 'Dancing Script', cursive;
-      font-weight: 900;
-      font-size: clamp(14px, 2.8vmin, 22px);
-      color: #7c4b99;
-      letter-spacing: .6px;
-    }
-
-    .controls {
-      position: absolute;
-      bottom: -30px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .file-input {
-      display: none;
-    }
-
-    /* DSLR Photo Viewer */
-    #photoViewer {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.95);
-      display: grid;
-      place-items: center;
-      z-index: 10;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-    }
-
-    #photoViewer.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .photo-container {
-  position: fixed;
-  width: min(90vw, 400px);
-  height: min(90vw, 400px);
-  perspective: 1000px;
-  overflow: hidden; /* ensures no part of the image escapes */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.photo-container img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* keeps image centered and fills container */
-}
-
-
-    .photo-card {
-      position: relative;
-      width: 100%;
-      height: 100%;
-      transform-style: preserve-3d;
-      transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-      cursor: pointer;
-    }
-
-    .photo-card.flipped {
-      transform: rotateY(180deg);
-    }
-
-    .photo-side,
-    .memory-side {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      border-radius: 20px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-      overflow: hidden;
-    }
-
-    .photo-side {
-      background: #fff;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .dslr-photo {
-      width: 100%;
-      aspect-ratio: 1;
-      object-fit: cover;
-      border-radius: 12px;
-      border: 3px solid #f0f0f0;
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-      user-select: none;
-      -webkit-user-drag: none;
-      transition: opacity .25s ease;
-    }
-
-    .photo-info {
-      margin-top: 15px;
-      text-align: center;
-      color: #333;
-      font-size: 14px;
-      font-weight: 600;
-    }
-
-    .memory-side {
-      background: linear-gradient(135deg, var(--cream), var(--pink-1));
-      transform: rotateY(180deg);
-      padding: 30px 25px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .memory-title {
-      font-family: 'Dancing Script', cursive;
-      font-size: 24px;
-      color: var(--pink-4);
-      margin-bottom: 20px;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .memory-text {
-      font-size: 16px;
-      line-height: 1.6;
-      color: var(--text);
-      max-width: 280px;
-    }
-
-    .photo-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.9);
-      border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      font-size: 20px;
-      color: var(--violet);
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    .photo-nav:hover {
-      background: rgba(255, 255, 255, 1);
-      transform: translateY(-50%) scale(1.1);
-    }
-
-    .photo-nav.prev {
-      left: -10px;
-    }
-
-    .photo-nav.next {
-      right: -10px;
-    }
-
-    .close-viewer {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: rgba(255, 255, 255, 0.9);
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      display: grid;
-      place-items: center;
-      cursor: pointer;
-      font-size: 18px;
-      color: var(--violet);
-      transition: all 0.3s ease;
-      backdrop-filter: blur(10px);
-    }
-
-    .close-viewer:hover {
-      background: rgba(255, 255, 255, 1);
-      transform: scale(1.1);
-    }
-
-    .viewer-hint {
-      position: absolute;
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(255, 255, 255, 0.9);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 14px;
-      color: var(--violet);
-      backdrop-filter: blur(10px);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
+      .balloon {
+        position: absolute;
+        bottom: -120px;
+        width: 26px;
+        height: 32px;
+        background: var(--pink-2);
+        border-radius: 50% 50% 47% 53% / 57% 56% 44% 43%;
+        box-shadow: 0 10px 18px var(--shadow) inset;
+        animation: floatUp linear infinite;
         opacity: 0.7;
       }
 
-      50% {
-        opacity: 1;
+      .balloon:after {
+        content: "";
+        position: absolute;
+        left: 11px;
+        bottom: -10px;
+        width: 4px;
+        height: 12px;
+        background: #d399b3;
+        border-radius: 0 0 2px 2px;
       }
-    }
 
-    /* Confetti canvas */
-    #confettiCanvas {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 1;
-    }
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0) translateX(0) rotate(0deg);
+          opacity: 0;
+        }
 
-    /* Utility */
-    .center {
-      text-align: center;
-    }
+        8% {
+          opacity: 0.6;
+        }
 
-    .muted {
-      color: #9a7890;
-    }
-
-    /* Heart cursor */
-    .heart {
-      position: fixed;
-      left: 0;
-      top: 0;
-      will-change: transform, opacity;
-      pointer-events: none;
-      z-index: 6;
-    }
-
-    .heart span {
-      display: block;
-      transform: translate(-50%, -50%);
-      font-size: 16px;
-    }
-
-    @keyframes floatHeart {
-      to {
-        transform: translate(-50%, calc(-50% - 40px));
-        opacity: 0;
+        100% {
+          transform: translateY(-120vh) translateX(30px) rotate(6deg);
+          opacity: 0.2;
+        }
       }
-    }
 
-    @media (max-width: 520px) {
+      /* Gift stage */
+      #stage {
+        position: relative;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        z-index: 2;
+        padding: 24px;
+      }
+
       .gift {
-        transform: scale(.9);
+        position: relative;
+        width: 200px;
+        height: 180px;
+        transform: translateZ(0);
+      }
+
+      .box {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 120px;
+        background: linear-gradient(180deg, var(--pink-3), var(--pink-4));
+        border-radius: 16px;
+        box-shadow: 0 20px 40px var(--shadow);
+        overflow: hidden;
+      }
+
+      .box:before,
+      .box:after {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 26px;
+        transform: translateX(-50%);
+        background: repeating-linear-gradient(
+          180deg,
+          #fff 0 6px,
+          #ffd9ec 6px 12px
+        );
+      }
+
+      .lid {
+        position: absolute;
+        left: -10px;
+        right: -10px;
+        bottom: 110px;
+        height: 46px;
+        background: linear-gradient(180deg, #fff, #ffe6f3);
+        border-radius: 14px;
+        box-shadow: 0 10px 20px var(--shadow);
+        transform-origin: 50% 100%;
+        transition: transform 900ms cubic-bezier(0.2, 0.8, 0.2, 1),
+          translate 900ms;
+      }
+
+      .lid:before {
+        content: "";
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 50%;
+        width: 26px;
+        transform: translateX(-50%);
+        background: repeating-linear-gradient(
+          180deg,
+          var(--violet) 0 6px,
+          var(--lavender) 6px 12px
+        );
+        border-radius: 6px;
+      }
+
+      .ribbon-bow {
+        position: absolute;
+        left: 50%;
+        bottom: 150px;
+        width: 120px;
+        height: 60px;
+        transform: translateX(-50%);
+      }
+
+      .loop {
+        position: absolute;
+        top: 0;
+        width: 54px;
+        height: 40px;
+        border: 6px solid var(--violet);
+        border-radius: 50% 50% 0 50%;
+        border-bottom: none;
+        border-right: none;
+      }
+
+      .loop.right {
+        right: 0;
+        transform: scaleX(-1);
+      }
+
+      .sparkles {
+        position: absolute;
+        inset: -40px;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .sparkles span {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: #fff;
+        border-radius: 50%;
+        box-shadow: 0 0 10px #fff, 0 0 18px var(--pink-3);
+        animation: twinkle 1.6s infinite ease-in-out;
+      }
+
+      @keyframes twinkle {
+        50% {
+          transform: scale(1.6);
+          opacity: 0.6;
+        }
+      }
+
+      .gift.open .lid {
+        transform: rotateX(60deg) translateY(-18px);
+      }
+
+      /* Greeting */
+      #greeting {
+        position: fixed;
+        inset: 0;
+        display: grid;
+        place-items: center;
+        background: radial-gradient(
+          800px 500px at 50% 0%,
+          rgba(255, 224, 244, 0.9),
+          rgba(255, 255, 255, 0.6)
+        );
+        backdrop-filter: blur(2px);
+        z-index: 3;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 600ms ease;
+      }
+
+      #greeting.show {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .greet-card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 24px 28px;
+        text-align: center;
+        box-shadow: 0 24px 60px var(--shadow);
+        max-width: 560px;
+      }
+
+      .title-script {
+        font-family: "Dancing Script", cursive;
+        font-size: 48px;
+        color: var(--pink-4);
+        margin: 6px 0 2px;
+        text-shadow: 0 2px 0 #fff;
+      }
+
+      .name-line {
+        font-family: "Dancing Script", cursive;
+        font-size: 32px;
+        color: #7b4962;
+      }
+
+      .name-line strong {
+        color: var(--violet);
+      }
+
+      .name-edit {
+        margin-top: 14px;
+        display: flex;
+        gap: 8px;
+        justify-content: center;
+      }
+
+      .name-edit input {
+        border: 2px solid #f4c7dc;
+        border-radius: 999px;
+        padding: 10px 14px;
+        width: 220px;
+        outline: none;
+        font-size: 16px;
+        background: #fffafc;
+      }
+
+      .name-edit textarea {
+        border: 2px solid #f4c7dc;
+        border-radius: 14px;
+        padding: 10px 12px;
+        width: 100%;
+        min-height: 72px;
+        outline: none;
+        font-size: 14px;
+        resize: vertical;
+        background: #fffafc;
+      }
+
+      .btn {
+        padding: 10px 16px;
+        border-radius: 999px;
+        border: 0;
+        background: var(--violet);
+        color: #fff;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 8px 18px var(--shadow);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 12px 24px var(--shadow);
+      }
+
+      .btn.secondary {
+        background: var(--pink-3);
+      }
+
+      .btn.ghost {
+        background: #fff;
+        color: var(--violet);
+        border: 2px solid var(--violet);
+      }
+
+      .greet-actions {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-top: 14px;
+        flex-wrap: wrap;
+      }
+
+      /* Chat typing card */
+      #chat {
+        position: relative;
+        margin: 40px auto 60px;
+        width: min(680px, calc(100% - 24px));
+        z-index: 999;
+      }
+
+      .chat-card {
+        background: #fff;
+        border-radius: 18px;
+        padding: 16px 14px 18px;
+        box-shadow: 0 16px 44px var(--shadow);
+      }
+
+      .chat-header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 8px 12px;
+        border-bottom: 1px dashed #f2cfe2;
+      }
+
+      .avatar {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--pink-2), var(--lavender));
+        display: grid;
+        place-items: center;
+        color: #fff;
+        font-weight: 800;
+      }
+
+      .chat-title {
+        font-weight: 800;
+        color: #8c4f6d;
+      }
+
+      .messages {
+        padding: 12px 6px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .msg {
+        max-width: 86%;
+        padding: 10px 12px;
+        border-radius: 16px 16px 16px 6px;
+        background: #fff6fb;
+        color: #6b3e56;
+        box-shadow: 0 4px 12px var(--shadow);
+        line-height: 1.4;
+      }
+
+      .msg.me {
+        align-self: flex-end;
+        border-radius: 16px 16px 6px 16px;
+        background: #f2ecff;
+        color: #5a3d9e;
+      }
+
+      .typing {
+        display: inline-flex;
+        gap: 4px;
+      }
+
+      .dot {
+        width: 6px;
+        height: 6px;
+        background: #b58fb0;
+        border-radius: 50%;
+        animation: blink 1.2s infinite ease-in-out;
+      }
+
+      .dot:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+
+      .dot:nth-child(3) {
+        animation-delay: 0.4s;
+      }
+
+      @keyframes blink {
+        50% {
+          opacity: 0.3;
+          transform: translateY(-2px);
+        }
+      }
+
+      /* Gallery ring */
+      #gallery {
+        position: relative;
+        height: 80vh;
+        min-height: 520px;
+        display: grid;
+        place-items: center;
+        margin-bottom: 80px;
+      }
+
+      .ring-stage {
+        position: relative;
+        width: min(90vmin, 680px);
+        height: min(90vmin, 680px);
+        perspective: 1200px;
+      }
+
+      .ring {
+        position: absolute;
+        inset: 0;
+        transform-style: preserve-3d;
+        animation: spin 20s linear infinite;
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotateY(0deg);
+        }
+
+        to {
+          transform: rotateY(360deg);
+        }
       }
 
       .ring img {
-        width: 110px;
-        height: 110px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform-style: preserve-3d;
+        width: 130px;
+        height: 130px;
+        object-fit: cover;
+        border-radius: 16px;
+        box-shadow: 0 12px 26px var(--shadow);
+        border: 4px solid #fff;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+      }
+
+      .ring img:hover {
+        transform: translate3d(-50%, -50%, 0) rotateY(var(--angle))
+          translateZ(var(--radius)) scale(1.1);
+      }
+
+      .center-text {
+        position: absolute;
+        left: 50%;
+        top: 10%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+
+      .center-text .script {
+        font-family: "Dancing Script", cursive;
+        font-size: clamp(28px, 6vmin, 56px);
+        color: var(--pink-4);
+      }
+
+      .center-text .name {
+        font-family: "Dancing Script", cursive;
+        font-weight: 900;
+        font-size: clamp(14px, 2.8vmin, 22px);
+        color: #7c4b99;
+        letter-spacing: 0.6px;
+      }
+
+      .controls {
+        position: absolute;
+        bottom: -30px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+
+      .file-input {
+        display: none;
+      }
+
+      /* DSLR Photo Viewer */
+      #photoViewer {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.95);
+        display: grid;
+        place-items: center;
+        z-index: 10;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease;
+      }
+
+      #photoViewer.show {
+        opacity: 1;
+        pointer-events: auto;
       }
 
       .photo-container {
-        width: min(95vw, 350px);
-        height: min(95vw, 350px);
+        position: fixed;
+        width: min(90vw, 400px);
+        height: min(90vw, 400px);
+        perspective: 1000px;
+        overflow: hidden; /* ensures no part of the image escapes */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .photo-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* keeps image centered and fills container */
+      }
+
+      .photo-card {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        transform-style: preserve-3d;
+        transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        cursor: pointer;
+      }
+
+      .photo-card.flipped {
+        transform: rotateY(180deg);
+      }
+
+      .photo-side,
+      .memory-side {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+      }
+
+      .photo-side {
+        background: #fff;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .dslr-photo {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        border-radius: 12px;
+        border: 3px solid #f0f0f0;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        user-select: none;
+        -webkit-user-drag: none;
+        transition: opacity 0.25s ease;
+      }
+
+      .photo-info {
+        margin-top: 15px;
+        text-align: center;
+        color: #333;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .memory-side {
+        background: linear-gradient(135deg, var(--cream), var(--pink-1));
+        transform: rotateY(180deg);
+        padding: 30px 25px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+      }
+
+      .memory-title {
+        font-family: "Dancing Script", cursive;
+        font-size: 24px;
+        color: var(--pink-4);
+        margin-bottom: 20px;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .memory-text {
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--text);
+        max-width: 280px;
       }
 
       .photo-nav {
-        width: 45px;
-        height: 45px;
-        font-size: 18px;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        font-size: 20px;
+        color: var(--violet);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
       }
 
-      /* Hide nav buttons on small screens; use swipe instead */
-      .photo-nav {
-        display: none;
+      .photo-nav:hover {
+        background: rgba(255, 255, 255, 1);
+        transform: translateY(-50%) scale(1.1);
       }
 
       .photo-nav.prev {
@@ -779,669 +674,1068 @@
       .photo-nav.next {
         right: -10px;
       }
-    }
-    .modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
 
-.modal.hidden {
-  display: none;
-}
+      .close-viewer {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: rgba(255, 255, 255, 0.9);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+        font-size: 18px;
+        color: var(--violet);
+        transition: all 0.3s ease;
+        backdrop-filter: blur(10px);
+      }
 
-.modal-content {
-  position: relative;
-  background: #fff;
-  padding: 10px;
-  border-radius: 10px;
-  max-width: 90%;
-  max-height: 80%;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
-}
+      .close-viewer:hover {
+        background: rgba(255, 255, 255, 1);
+        transform: scale(1.1);
+      }
 
-.modal-content video {
-  width: 100%;
-  height: 500px;
-  border-radius: 8px;
-  object-fit: contain;
-}
+      .viewer-hint {
+        position: absolute;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(255, 255, 255, 0.9);
+        padding: 8px 16px;
+        border-radius: 20px;
+        font-size: 14px;
+        color: var(--violet);
+        backdrop-filter: blur(10px);
+        animation: pulse 2s infinite;
+      }
 
-.close {
-  position: absolute;
-  top: -10px;
-  right: -10px;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
-  color: #fff;
-  background: #000;
-  border-radius: 50%;
-  width: 35px;
-  height: 35px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-    /* Prevent background scroll when modal is open */
-    body.modal-open {
-      overflow: hidden;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="balloons" aria-hidden="true" id="balloons"></div>
-
-  <canvas id="confettiCanvas"></canvas>
-
-  <!-- Photo Viewer Modal -->
-  <div id="photoViewer">
-    <div class="photo-container">
-      <div class="photo-card" id="photoCard">
-        <div class="photo-side">
-          <img class="dslr-photo" id="currentPhoto" src="" alt="Memory photo">
-          <div class="photo-info" id="photoInfo">Click to flip & read the memory</div>
-        </div>
-        <div class="memory-side">
-          <div class="memory-title">Memory Card</div>
-          <div class="memory-text" id="memoryText">
-            This moment captured a beautiful smile and the joy of being together.
-            Every photo tells a story, and this one speaks of happiness.
-          </div>
-        </div>
-      </div>
-      <button class="photo-nav prev" id="prevPhoto">‹</button>
-      <button class="photo-nav next" id="nextPhoto">›</button>
-      <button class="close-viewer" id="closeViewer">×</button>
-      <div class="viewer-hint">Click photo to flip </div>
-    </div>
-  </div>
-
-  <main id="stage">
-    <section id="giftStage">
-      <div class="gift" id="gift">
-        <div class="ribbon-bow">
-          <div class="loop"></div>
-          <div class="loop right"></div>
-        </div>
-        <div class="lid"></div>
-        <div class="box"></div>
-        <div class="sparkles" id="sparkles"></div>
-      </div>
-      <p class="center muted">Tap the gift to open 🎁</p>
-    </section>
-
-    <section id="chat" class="hidden">
-      <div class="chat-card">
-        <div class="chat-header">
-          <div class="avatar">💖</div>
-          <div>
-            <div class="chat-title">Birthday Chat</div>
-            <small class="muted">typing surprises for you…</small>
-          </div>
-        </div>
-        <div class="messages" id="messages"></div>
-      </div>
-    </section>
-
-    <section id="gallery" class="hidden">
-      <div class="ring-stage">
-        <div class="ring" id="ring"></div>
-        <div class="center-text">
-          <div class="script">Happy Birthday</div>
-          <div class="name" id="centerName">Kaviya</div>
-        </div>
-        <div class="controls">
-          <button class="btn" id="replay">Replay</button>
-          <button class="btn secondary" id="viewPhotos">View Photos</button>
-          <button class="btn secondary" id="viewVideo">View Video</button>
-
-        </div>
-      </div>
-    </section>
-  </main>
-  <div id="videoModal" class="modal hidden">
-    <div class="modal-content">
-      <span id="closeModal" class="close">&times;</span>
-      <video id="videoPlayer" src="videos/video.mp4" controls></video>
-    </div>
-  </div>
-  <section id="greeting" class="hidden">
-    <div class="greet-card">
-      <div class="title-script">Happy Birthday!</div>
-      <div class="name-line">to <strong id="greetName">Kaviya</strong> ✨</div>
-      <div class="greet-actions">
-        <button class="btn ghost" id="musicToggle">Music: Off</button>
-      </div>
-    </div>
-  </section>
-  <audio id="bgMusic" src="audios/audio.mp3" loop></audio>
-  <script>
-    const $ = (s, r = document) => r.querySelector(s);
-    const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
-
-    // Balloons
-    const balloonsEl = $('#balloons');
-    for (let i = 0; i < 18; i++) {
-      const b = document.createElement('div');
-      b.className = 'balloon';
-      const left = Math.random() * 100;
-      const delay = Math.random() * 8;
-      const dur = 12 + Math.random() * 10;
-      b.style.left = left + 'vw';
-      b.style.animationDuration = dur + 's';
-      b.style.animationDelay = delay + 's';
-      b.style.background = `hsl(${320 + Math.random() * 40}, 80%, ${70 + Math.random() * 10}%)`;
-      balloonsEl.appendChild(b);
-    }
-
-    // Sparkles around gift
-    const sparkles = $('#sparkles');
-    for (let i = 0; i < 26; i++) {
-      const s = document.createElement('span');
-      s.style.left = Math.random() * 100 + '%';
-      s.style.top = Math.random() * 100 + '%';
-      s.style.animationDelay = (Math.random() * 1.2) + 's';
-      sparkles.appendChild(s);
-    }
-
-    // Name handling (fixed to Kaviya)
-    let birthdayName = 'Kaviya';
-    const updateNameEverywhere = (name) => {
-      $('#greetName').textContent = name;
-      $('#centerName').textContent = name;
-      document.title = 'Happy Birthday ' + name + ' 🎉';
-    };
-    updateNameEverywhere(birthdayName);
-
-    // Confetti
-    const confetti = (() => {
-      const canvas = $('#confettiCanvas');
-      const ctx = canvas.getContext('2d');
-      let particles = []; let running = false; let rafId = null;
-      const resize = () => { canvas.width = innerWidth; canvas.height = innerHeight; };
-      const random = (min, max) => Math.random() * (max - min) + min;
-      const colors = ['#ff7fb3', '#ffafd1', '#c7b7ff', '#9a7dff', '#ffd2e5', '#fff'];
-      const spawn = (count = 220) => {
-        for (let i = 0; i < count; i++) {
-          particles.push({
-            x: random(0, canvas.width), y: random(-20, -canvas.height * 0.2),
-            r: random(2, 5),
-            c: colors[(Math.random() * colors.length) | 0],
-            vx: random(-1, 1), vy: random(2, 5),
-            rot: random(0, 360), vr: random(-6, 6), shape: Math.random() > 0.6 ? 'rect' : 'circle',
-          });
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.7;
         }
+
+        50% {
+          opacity: 1;
+        }
+      }
+
+      /* Confetti canvas */
+      #confettiCanvas {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      /* Utility */
+      .center {
+        text-align: center;
+      }
+
+      .muted {
+        color: #9a7890;
+      }
+
+      /* Heart cursor */
+      .heart {
+        position: fixed;
+        left: 0;
+        top: 0;
+        will-change: transform, opacity;
+        pointer-events: none;
+        z-index: 6;
+      }
+
+      .heart span {
+        display: block;
+        transform: translate(-50%, -50%);
+        font-size: 16px;
+      }
+
+      @keyframes floatHeart {
+        to {
+          transform: translate(-50%, calc(-50% - 40px));
+          opacity: 0;
+        }
+      }
+
+      @media (max-width: 520px) {
+        .gift {
+          transform: scale(0.9);
+        }
+
+        .ring img {
+          width: 110px;
+          height: 110px;
+        }
+
+        .photo-container {
+          width: min(95vw, 350px);
+          height: min(95vw, 350px);
+        }
+
+        .photo-nav {
+          width: 45px;
+          height: 45px;
+          font-size: 18px;
+        }
+
+        /* Hide nav buttons on small screens; use swipe instead */
+        .photo-nav {
+          display: none;
+        }
+
+        .photo-nav.prev {
+          left: -10px;
+        }
+
+        .photo-nav.next {
+          right: -10px;
+        }
+      }
+      .modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+      }
+
+      .modal.hidden {
+        display: none;
+      }
+
+      .modal-content {
+        position: relative;
+        background: #fff;
+        padding: 10px;
+        border-radius: 10px;
+        max-width: 95%;
+        max-height: 90%;
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      }
+
+      .video-buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 20px;
+      }
+
+      .video-btn {
+        margin: 5px;
+      }
+
+      .modal-content video {
+        width: 100%;
+        height: 80vh;
+        min-height: 600px;
+        border-radius: 8px;
+        object-fit: contain;
+      }
+
+      .close {
+        position: absolute;
+        top: -10px;
+        right: -10px;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+        color: #fff;
+        background: #000;
+        border-radius: 50%;
+        width: 35px;
+        height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      /* Prevent background scroll when modal is open */
+      body.modal-open {
+        overflow: hidden;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="balloons" aria-hidden="true" id="balloons"></div>
+
+    <canvas id="confettiCanvas"></canvas>
+
+    <!-- Photo Viewer Modal -->
+    <div id="photoViewer">
+      <div class="photo-container">
+        <div class="photo-card" id="photoCard">
+          <div class="photo-side">
+            <img
+              class="dslr-photo"
+              id="currentPhoto"
+              src=""
+              alt="Memory photo"
+            />
+            <div class="photo-info" id="photoInfo">
+              Click to flip & read the memory
+            </div>
+          </div>
+          <div class="memory-side">
+            <div class="memory-title">Memory Card</div>
+            <div class="memory-text" id="memoryText">
+              This moment captured a beautiful smile and the joy of being
+              together. Every photo tells a story, and this one speaks of
+              happiness.
+            </div>
+          </div>
+        </div>
+        <button class="photo-nav prev" id="prevPhoto">‹</button>
+        <button class="photo-nav next" id="nextPhoto">›</button>
+        <button class="close-viewer" id="closeViewer">×</button>
+        <div class="viewer-hint">Click photo to flip</div>
+      </div>
+    </div>
+
+    <main id="stage">
+      <section id="giftStage">
+        <div class="gift" id="gift">
+          <div class="ribbon-bow">
+            <div class="loop"></div>
+            <div class="loop right"></div>
+          </div>
+          <div class="lid"></div>
+          <div class="box"></div>
+          <div class="sparkles" id="sparkles"></div>
+        </div>
+        <p class="center muted">Tap the gift to open 🎁</p>
+      </section>
+
+      <section id="chat" class="hidden">
+        <div class="chat-card">
+          <div class="chat-header">
+            <div class="avatar">💖</div>
+            <div>
+              <div class="chat-title">Birthday Chat</div>
+              <small class="muted">typing surprises for you…</small>
+            </div>
+          </div>
+          <div class="messages" id="messages"></div>
+        </div>
+      </section>
+
+      <section id="gallery" class="hidden">
+        <div class="ring-stage">
+          <div class="ring" id="ring"></div>
+          <div class="center-text">
+            <div class="script">Happy Birthday</div>
+            <div class="name" id="centerName">Arul</div>
+          </div>
+          <div class="controls">
+            <button class="btn" id="replay">Replay</button>
+            <button class="btn secondary" id="viewPhotos">View Photos</button>
+            <button class="btn secondary" id="viewVideo">View Video</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <div id="videoModal" class="modal hidden">
+      <div class="modal-content">
+        <span id="closeModal" class="close">&times;</span>
+        <video id="videoPlayer" controls></video>
+        <div id="videoButtons" class="video-buttons">
+          <!-- Video buttons will be generated here -->
+        </div>
+      </div>
+    </div>
+    <section id="greeting" class="hidden">
+      <div class="greet-card">
+        <div class="title-script">Happy Birthday!</div>
+        <div class="name-line">to <strong id="greetName">Arul</strong> ✨</div>
+        <div class="greet-actions">
+          <button class="btn ghost" id="musicToggle">Music: Off</button>
+        </div>
+      </div>
+    </section>
+    <audio id="bgMusic" src="audios/audio.mp3" loop></audio>
+    <script>
+      const $ = (s, r = document) => r.querySelector(s);
+      const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+
+      // Balloons
+      const balloonsEl = $("#balloons");
+      for (let i = 0; i < 18; i++) {
+        const b = document.createElement("div");
+        b.className = "balloon";
+        const left = Math.random() * 100;
+        const delay = Math.random() * 8;
+        const dur = 12 + Math.random() * 10;
+        b.style.left = left + "vw";
+        b.style.animationDuration = dur + "s";
+        b.style.animationDelay = delay + "s";
+        b.style.background = `hsl(${320 + Math.random() * 40}, 80%, ${
+          70 + Math.random() * 10
+        }%)`;
+        balloonsEl.appendChild(b);
+      }
+
+      // Sparkles around gift
+      const sparkles = $("#sparkles");
+      for (let i = 0; i < 26; i++) {
+        const s = document.createElement("span");
+        s.style.left = Math.random() * 100 + "%";
+        s.style.top = Math.random() * 100 + "%";
+        s.style.animationDelay = Math.random() * 1.2 + "s";
+        sparkles.appendChild(s);
+      }
+
+      // Name handling (fixed to Arul)
+      let birthdayName = "Arul";
+      const updateNameEverywhere = (name) => {
+        $("#greetName").textContent = name;
+        $("#centerName").textContent = name;
+        document.title = "Happy Birthday " + name + " 🎉";
       };
-      const draw = (p) => {
-        ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(p.rot * Math.PI / 180); ctx.fillStyle = p.c;
-        if (p.shape === 'rect') { ctx.fillRect(-p.r, -p.r, p.r * 2, p.r * 2); }
-        else { ctx.beginPath(); ctx.arc(0, 0, p.r, 0, Math.PI * 2); ctx.fill(); }
-        ctx.restore();
-      };
-      const tick = () => {
-        if (!running) return; ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles.forEach(p => { p.x += p.vx; p.y += p.vy; p.vy += 0.03; p.rot += p.vr; if (p.y > canvas.height + 10) { p.y = -10; p.x = random(0, canvas.width); } });
-        particles.forEach(draw);
-        rafId = requestAnimationFrame(tick);
-      };
-      const start = (durationMs = 2200, count = 260) => {
-        resize(); particles = []; spawn(count); running = true; cancelAnimationFrame(rafId); tick();
-        setTimeout(() => { running = false; }, durationMs);
-      };
-      addEventListener('resize', resize);
-      return { start };
-    })();
+      updateNameEverywhere(birthdayName);
 
-    let isGiftOpened = false;
-    const openGift = () => {
-      if (isGiftOpened) return; isGiftOpened = true;
-      $('#gift').classList.add('open');
-      $('#giftStage').classList.add('hidden');
-      // Try to start music on the same user gesture as opening the gift
-      startMusic();
-      confetti.start(2800, 340);
-      setTimeout(() => {
-        $('#greeting').classList.add('show');
-        $('#greeting').classList.remove('hidden');
-        setTimeout(proceedToChat, 2800);
-      }, 500);
-    };
-
-    // Open only when the gift is clicked
-    $('#gift').addEventListener('click', (e) => { e.stopPropagation(); openGift(); });
-
-    // Tap anywhere confetti
-    addEventListener('click', (e) => { confetti.start(1300, 160); makeHeart(e.clientX, e.clientY); });
-
-    // Proceed automatically after short pause
-    const proceedToChat = () => {
-      $('#greeting').classList.remove('show');
-      setTimeout(() => { $('#greeting').classList.add('hidden'); }, 300);
-      $('#chat').classList.remove('hidden');
-      startTypingSequence();
-    };
-
-    // Chat typing
-    let customWish = '';
-    const buildMessages = () => [
-      () => `Hiiii ${birthdayName}! 🎀`,
-      () => `Today is all about you — the sweetest soul I know ✨`,
-      () => `Happy 24th, my love! Every year with you feels like the best chapter of my life 📖❤️`,
-      () => customWish ? customWish : `Wishing you giggles, cake crumbs, and sparkly surprises 🧁✨`,
-      () => `Here's a tiny love-letter of messages, typed just for you… 💌`,
-      () => `Thank you for being the most beautiful part of my every day. I’m endlessly lucky to LOVE YOU 💖`,
-      () => `May your dreams sprinkle into reality like confetti 🌈`,
-      () => `Okay okay, enough cheesy lines 😅`,
-      () => `Ready for your little photo carousel? 📸`,
-      () => `Let's go spin some memories…`,
-    ];
-
-    const typeMessage = (text, mine = false) => new Promise(resolve => {
-      const wrap = document.createElement('div');
-      wrap.className = 'msg' + (mine ? ' me' : '');
-      const typing = document.createElement('span');
-      typing.className = 'typing';
-      typing.innerHTML = '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
-      wrap.appendChild(typing);
-      $('#messages').appendChild(wrap);
-      $('#messages').scrollTop = $('#messages').scrollHeight;
-      const delay = 500 + Math.min(1800, text.length * 45);
-      setTimeout(() => {
-        typing.remove();
-        let i = 0; const span = document.createElement('span'); wrap.appendChild(span);
-        const step = () => {
-          span.textContent = text.slice(0, i++);
-          $('#messages').scrollTop = $('#messages').scrollHeight;
-          if (i <= text.length) requestAnimationFrame(step);
-          else resolve();
+      // Confetti
+      const confetti = (() => {
+        const canvas = $("#confettiCanvas");
+        const ctx = canvas.getContext("2d");
+        let particles = [];
+        let running = false;
+        let rafId = null;
+        const resize = () => {
+          canvas.width = innerWidth;
+          canvas.height = innerHeight;
         };
-        step();
-      }, delay);
-    });
-
-    const startTypingSequence = async () => {
-      const seq = buildMessages();
-      for (let i = 0; i < seq.length; i++) {
-        const mine = i % 3 === 2;
-        await typeMessage(seq[i](), mine);
-        await new Promise(r => setTimeout(r, 350));
-      }
-      // Transition
-      setTimeout(() => {
-        $('#chat').classList.add('hidden');
-        showGallery();
-      }, 600);
-    };
-
-    // Photo data with memories
-    const photoData = [
-      {
-        src: 'images/image10.jpg',
-        memory: "✨ First meet after proposal. The air felt different that day—like the world was holding its breath, waiting to witness two hearts that had already said “yes” finally beat side by side."
-      },
-      {
-        src: 'images/image9.jpg',
-        memory: "✨ First bike ride. The wind tangled our laughter together, your hands wrapped around me, and in that moment, the road became a silent witness to our forever."
-      },
-      {
-        src: 'images/image12.jpg',
-        memory: "✨ First touch. It wasn’t just skin meeting skin—it was sparks, warmth, and the beginning of a language only our hearts could understand."
-      },
-      {
-        src: 'images/image11.jpeg',
-        memory: "✨ First meet in Chennai. Amid the bustling city, it felt like the world faded, and all I could see was you—Chennai became our city of love that day."
-      },
-      {
-        src: 'images/image13.jpeg',
-        memory: "✨ First meet in beach. With waves crashing and the horizon stretching endlessly, our eyes met like the ocean meeting the sky—boundless, eternal."
-      },
-      {
-        src: 'images/image14.jpeg',
-        memory: "✨ First outing.It wasn’t about where we went; it was about being with you. Every step, every laugh, every glance made the world feel softer, sweeter."
-      },
-      {
-        src: 'images/image15.png',
-        memory: "Your kindness creates ripples of joy wherever you go. This memory represents all the hearts you've touched."
-      },
-      {
-        src: 'images/image16.png',
-        memory: "Dancing through life with grace and humor - that's you! This captures your ability to find joy in every moment."
-      }
-    ];
-    const ringData = [
-      {
-        src: 'images/image1.jpeg',
-        memory: "This moment captured pure joy and laughter. The way your eyes sparkle when you smile reminds everyone why you're so special."
-      },
-      {
-        src: 'images/image2.jpeg',
-        memory: "Adventure calls and you always answer! This photo represents your brave spirit and love for exploring new places."
-      },
-      {
-        src: 'images/image3.jpeg',
-        memory: "Nature brings out the best in you. Your appreciation for beautiful moments like this inspires everyone around you."
-      },
-      {
-        src: 'images/image4.jpg',
-        memory: "Every sunset with you feels like a promise of brighter tomorrows. Your optimism lights up even the darkest days."
-      },
-      {
-        src: 'images/image5.jpg',
-        memory: "Your love for simple pleasures makes every ordinary moment extraordinary. This captures your beautiful perspective on life."
-      },
-      {
-        src: 'images/image6.jpeg',
-        memory: "The way you find wonder in everyday things is magical. This moment shows your curious and playful spirit."
-      },
-      {
-        src: 'images/image7.jpg',
-        memory: "Your kindness creates ripples of joy wherever you go. This memory represents all the hearts you've touched."
-      },
-      {
-        src: 'images/image8.jpg',
-        memory: "Dancing through life with grace and humor - that's you! This captures your ability to find joy in every moment."
-      }
-    ];
-
-    // Current photo index
-    let currentPhotoIndex = 0;
-
-    // Photo Viewer functionality
-    const photoViewer = $('#photoViewer');
-    const photoCard = $('#photoCard');
-    const currentPhoto = $('#currentPhoto');
-    const memoryText = $('#memoryText');
-    const photoInfo = $('#photoInfo');
-    const viewerHint = $('.viewer-hint');
-    // Prevent image dragging
-    currentPhoto.setAttribute('draggable', 'false');
-
-    // Preload photos to reduce jank when navigating
-    const preloadedPhotos = new Map();
-    function preloadPhotos(list) {
-      list.forEach(item => {
-        const src = typeof item === 'string' ? item : item.src;
-        if (!src || preloadedPhotos.has(src)) return;
-        const img = new Image();
-        img.src = src;
-        img.onload = () => preloadedPhotos.set(src, true);
-        img.onerror = () => preloadedPhotos.set(src, false);
-      });
-    }
-    preloadPhotos(photoData);
-
-    function openPhotoViewer(index = 0) {
-      currentPhotoIndex = index;
-      updatePhotoDisplay();
-      photoViewer.classList.add('show');
-      document.body.classList.add('modal-open');
-      // Reset flip state
-      photoCard.classList.remove('flipped');
-      // Update hint text depending on device
-      const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-      if (viewerHint) {
-        viewerHint.textContent = isTouch ? 'Tap to flip • Swipe left/right to change' : 'Click to flip • Use ←/→ to change';
-      }
-    }
-
-    function closePhotoViewer() {
-      photoViewer.classList.remove('show');
-      photoCard.classList.remove('flipped');
-      document.body.classList.remove('modal-open');
-    }
-
-    function updatePhotoDisplay() {
-      const photo = photoData[currentPhotoIndex];
-      // Fade-out current image while the next one loads
-      currentPhoto.style.opacity = '0';
-      // Swap content
-      memoryText.textContent = photo.memory;
-      photoInfo.textContent = `Photo ${currentPhotoIndex + 1} of ${photoData.length} • Click to flip & read the memory`;
-      // Ensure onload sets visible; handle cached images too
-      currentPhoto.onload = () => {
-        currentPhoto.style.opacity = '1';
-      };
-      currentPhoto.src = photo.src;
-      if (currentPhoto.complete) {
-        // If already cached, onload may not fire
-        currentPhoto.style.opacity = '1';
-      }
-    }
-
-    function nextPhoto() {
-      currentPhotoIndex = (currentPhotoIndex + 1) % photoData.length;
-      updatePhotoDisplay();
-      // Reset flip state when changing photos
-      photoCard.classList.remove('flipped');
-    }
-
-    function prevPhoto() {
-      currentPhotoIndex = (currentPhotoIndex - 1 + photoData.length) % photoData.length;
-      updatePhotoDisplay();
-      // Reset flip state when changing photos
-      photoCard.classList.remove('flipped');
-    }
-
-    // Event listeners for photo viewer
-    $('#closeViewer').addEventListener('click', closePhotoViewer);
-    $('#nextPhoto').addEventListener('click', nextPhoto);
-    $('#prevPhoto').addEventListener('click', prevPhoto);
-    // Prevent flip when a swipe just happened
-    let lastSwipeTime = 0;
-    $('#photoCard').addEventListener('click', () => {
-      if (Date.now() - lastSwipeTime < 300) return;
-      photoCard.classList.toggle('flipped');
-    });
-
-    // Touch swipe navigation for mobile
-    (function enableSwipe() {
-      const isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-      if (!isTouch) return;
-      let startX = 0, startY = 0, swiping = false;
-      photoCard.addEventListener('touchstart', (e) => {
-        if (!photoViewer.classList.contains('show')) return;
-        const t = e.touches[0];
-        startX = t.clientX; startY = t.clientY; swiping = false;
-      }, { passive: true });
-      photoCard.addEventListener('touchmove', (e) => {
-        if (!photoViewer.classList.contains('show')) return;
-        const t = e.touches[0];
-        const dx = t.clientX - startX; const dy = t.clientY - startY;
-        if (!swiping) {
-          if (Math.abs(dx) > 12 && Math.abs(dx) > Math.abs(dy) * 1.2) {
-            swiping = true;
+        const random = (min, max) => Math.random() * (max - min) + min;
+        const colors = [
+          "#ff7fb3",
+          "#ffafd1",
+          "#c7b7ff",
+          "#9a7dff",
+          "#ffd2e5",
+          "#fff",
+        ];
+        const spawn = (count = 220) => {
+          for (let i = 0; i < count; i++) {
+            particles.push({
+              x: random(0, canvas.width),
+              y: random(-20, -canvas.height * 0.2),
+              r: random(2, 5),
+              c: colors[(Math.random() * colors.length) | 0],
+              vx: random(-1, 1),
+              vy: random(2, 5),
+              rot: random(0, 360),
+              vr: random(-6, 6),
+              shape: Math.random() > 0.6 ? "rect" : "circle",
+            });
           }
-        }
-        if (swiping) {
-          e.preventDefault();
-        }
-      }, { passive: false });
-      photoCard.addEventListener('touchend', (e) => {
-        if (!photoViewer.classList.contains('show')) return;
-        if (!swiping) return;
-        const t = e.changedTouches[0];
-        const dx = t.clientX - startX;
-        if (Math.abs(dx) > 48) {
-          if (dx < 0) nextPhoto(); else prevPhoto();
-          lastSwipeTime = Date.now();
-        }
+        };
+        const draw = (p) => {
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.rot * Math.PI) / 180);
+          ctx.fillStyle = p.c;
+          if (p.shape === "rect") {
+            ctx.fillRect(-p.r, -p.r, p.r * 2, p.r * 2);
+          } else {
+            ctx.beginPath();
+            ctx.arc(0, 0, p.r, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        };
+        const tick = () => {
+          if (!running) return;
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+          particles.forEach((p) => {
+            p.x += p.vx;
+            p.y += p.vy;
+            p.vy += 0.03;
+            p.rot += p.vr;
+            if (p.y > canvas.height + 10) {
+              p.y = -10;
+              p.x = random(0, canvas.width);
+            }
+          });
+          particles.forEach(draw);
+          rafId = requestAnimationFrame(tick);
+        };
+        const start = (durationMs = 2200, count = 260) => {
+          resize();
+          particles = [];
+          spawn(count);
+          running = true;
+          cancelAnimationFrame(rafId);
+          tick();
+          setTimeout(() => {
+            running = false;
+          }, durationMs);
+        };
+        addEventListener("resize", resize);
+        return { start };
+      })();
+
+      let isGiftOpened = false;
+      const openGift = () => {
+        if (isGiftOpened) return;
+        isGiftOpened = true;
+        $("#gift").classList.add("open");
+        $("#giftStage").classList.add("hidden");
+        // Try to start music on the same user gesture as opening the gift
+        startMusic();
+        confetti.start(2800, 340);
+        setTimeout(() => {
+          $("#greeting").classList.add("show");
+          $("#greeting").classList.remove("hidden");
+          setTimeout(proceedToChat, 2800);
+        }, 500);
+      };
+
+      // Open only when the gift is clicked
+      $("#gift").addEventListener("click", (e) => {
+        e.stopPropagation();
+        openGift();
       });
-    })();
 
-    // Close viewer on escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && photoViewer.classList.contains('show')) {
-        closePhotoViewer();
-      }
-      if (photoViewer.classList.contains('show')) {
-        if (e.key === 'ArrowRight') nextPhoto();
-        if (e.key === 'ArrowLeft') prevPhoto();
-        if (e.key === ' ') {
-          e.preventDefault();
-          photoCard.classList.toggle('flipped');
-        }
-      }
-    });
+      // Tap anywhere confetti
+      addEventListener("click", (e) => {
+        confetti.start(1300, 160);
+        makeHeart(e.clientX, e.clientY);
+      });
 
-    // Close viewer when clicking outside the photo container
-    photoViewer.addEventListener('click', (e) => {
-      if (e.target === photoViewer) {
-        closePhotoViewer();
-      }
-    });
+      // Proceed automatically after short pause
+      const proceedToChat = () => {
+        $("#greeting").classList.remove("show");
+        setTimeout(() => {
+          $("#greeting").classList.add("hidden");
+        }, 300);
+        $("#chat").classList.remove("hidden");
+        startTypingSequence();
+      };
 
-    // Gallery ring
-    function buildRing(photos) {
-      const ring = $('#ring'); ring.innerHTML = '';
-      const n = Math.max(8, Math.min(photos.length, 12));
-      const radius = Math.min(innerWidth, innerHeight) * 0.32 + 110;
-      for (let i = 0; i < n; i++) {
-        const img = document.createElement('img');
-        img.src = photos[i % photos.length].src || photos[i % photos.length];
-        img.style.setProperty('--angle', `${(360 / n) * i}deg`);
-        img.style.setProperty('--radius', `${radius}px`);
-        const angle = (360 / n) * i;
-        img.style.transform = `translate3d(-50%, -50%, 0) rotateY(${angle}deg) translateZ(${radius}px)`;
+      // Chat typing
+      let customWish = "";
+      const buildMessages = () => [
+        () => `A special day deserves a special surprise 🎉💖`,
+        () => `Hey birthday boy ✨ 🎀`,
+        () => `Happy Birthday to the most amazing man in my life ❤️`,
+        () => `May this year bring you everything you’ve been dreaming of ✨`,
+        () =>
+          customWish
+            ? customWish
+            : `You make every single day brighter just by being you 💫🧁✨`,
+        () => `I’m so lucky to call you mine 🥰`,
+        () =>
+          `Thank you for being the most beautiful part of my every day. I’m endlessly lucky to LOVE YOU 💖`,
+        () => `Ready for your little photo carousel? 📸`,
+        () => `Let's go spin some memories…`,
+      ];
 
-        // Add click event to open photo viewer
-        img.addEventListener('click', (e) => {
-          e.stopPropagation();
-          openPhotoViewer(i % photos.length);
+      const typeMessage = (text, mine = false) =>
+        new Promise((resolve) => {
+          const wrap = document.createElement("div");
+          wrap.className = "msg" + (mine ? " me" : "");
+          const typing = document.createElement("span");
+          typing.className = "typing";
+          typing.innerHTML =
+            '<span class="dot"></span><span class="dot"></span><span class="dot"></span>';
+          wrap.appendChild(typing);
+          $("#messages").appendChild(wrap);
+          $("#messages").scrollTop = $("#messages").scrollHeight;
+          const delay = 500 + Math.min(1800, text.length * 45);
+          setTimeout(() => {
+            typing.remove();
+            let i = 0;
+            const span = document.createElement("span");
+            wrap.appendChild(span);
+            const step = () => {
+              span.textContent = text.slice(0, i++);
+              $("#messages").scrollTop = $("#messages").scrollHeight;
+              if (i <= text.length) requestAnimationFrame(step);
+              else resolve();
+            };
+            step();
+          }, delay);
         });
 
-        ring.appendChild(img);
-      }
-    }
-
-    function showGallery() {
-      $('#gallery').classList.remove('hidden');
-      buildRing(ringData);
-      confetti.start(2000, 240);
-    }
-
-    // View Photos button
-    $('#viewPhotos').addEventListener('click', () => {
-      openPhotoViewer(0);
-    });
-    $('#viewVideo').addEventListener('click', () => {
-      $('#greeting').classList.remove('hidden');
-    });
- 
-
-    $('#replay').addEventListener('click', () => {
-      // reset
-      $('#gallery').classList.add('hidden');
-      $('#chat').classList.add('hidden');
-      $('#greeting').classList.add('hidden');
-      $('#gift').classList.remove('open');
-      $('#giftStage').classList.remove('hidden');
-      $('#messages').innerHTML = '';
-      closePhotoViewer();
-      isGiftOpened = false;
-      // timeline
-      setTimeout(openGift, 600);
-      scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // Heart trail
-    function makeHeart(x, y) {
-      const h = document.createElement('div'); h.className = 'heart';
-      const span = document.createElement('span'); span.textContent = '💗'; h.appendChild(span);
-      document.body.appendChild(h);
-      h.style.transform = `translate(${x}px, ${y}px)`;
-      h.style.opacity = '1';
-      span.style.animation = 'floatHeart 900ms ease-out forwards';
-      setTimeout(() => h.remove(), 900);
-    }
-
-    // Music functionality (removed audio element reference since no audio file provided)
-    let isMusicOn = false;
-    const bgMusic = $('#bgMusic');
-    bgMusic.preload = 'auto';
-    bgMusic.volume = 0.7;
-    function updateMusicToggle() {
-      const btn = $('#musicToggle');
-      const isActuallyPlaying = !bgMusic.paused && bgMusic.currentTime > 0 && !bgMusic.ended;
-      if (btn) btn.textContent = 'Music: ' + (isActuallyPlaying ? 'On' : 'Off');
-    }
-
-    let pendingStartOnPointerDown = null;
-    function startMusic() {
-      if (isMusicOn) return;
-      bgMusic.play().then(() => {
-        isMusicOn = true;
-        updateMusicToggle();
-        if (pendingStartOnPointerDown) {
-          window.removeEventListener('pointerdown', pendingStartOnPointerDown);
-          pendingStartOnPointerDown = null;
+      const startTypingSequence = async () => {
+        const seq = buildMessages();
+        for (let i = 0; i < seq.length; i++) {
+          const mine = i % 3 === 2;
+          await typeMessage(seq[i](), mine);
+          await new Promise((r) => setTimeout(r, 350));
         }
-      }).catch(() => {
-        if (!pendingStartOnPointerDown) {
-          pendingStartOnPointerDown = () => { startMusic(); };
-          window.addEventListener('pointerdown', pendingStartOnPointerDown, { once: true });
+        // Transition
+        setTimeout(() => {
+          $("#chat").classList.add("hidden");
+          showGallery();
+        }, 600);
+      };
+
+      // Photo data with memories
+      const photoData = [
+        {
+          src: "images/IMG1A.jpg",
+          memory:
+            "Look who’s stealing the show even back then 😄💃. A mini version of the birthday boy — already camera ready at his aunty’s wedding 😂📸. The little charmer with his family — cuteness level 100% 😍",
+        },
+        {
+          src: "images/IMG2A.jpg",
+          memory:
+            "Partners in crime since childhood 😜👦👧.The original squad — brother, sister, and endless mischief 😂🎉...Siblings: the only people who can tease you and still love you endlessly 💕",
+        },
+        {
+          src: "images/IMG2B.jpg",
+          memory:
+            "A sweet brother-sister moment — love served with a smile 🍰❤️",
+        },
+        {
+          src: "images/IMG3.jpeg",
+          memory:
+            "That boss look hits different 😎💼. Work mode: stylish and unstoppable 💫. The charm, the confidence — that’s the birthday boy in his element 😍",
+        },
+        {
+          src: "images/IMG3A.jpeg",
+          memory:
+            "The crazy squad that makes every moment unforgettable 😂🎊 Where there’s laughter, there are friends like these 😎🤍 Good times + Crazy friends = Best memories ever 🤪🎈 Because life’s better when you’ve got friends who act like family 😄💫 The legends, the laughter, the lifelong memories 🥳🔥",
+        },
+        {
+          src: "images/IMG6.jpg",
+          memory:
+            "In your hand, I found my forever ❤️ Every heartbeat feels right when your hand is in mine 💫 Two hands, one heart — always together 🥹💕 Your hand in mine makes every moment feel complete 💍 No matter where life takes us, I’ll always hold your hand 🤝💖",
+        },
+        {
+          src: "images/IMG8.jpg",
+          memory:
+            "After marriage, our love didn’t just grow — it blossomed into something deeper and more beautiful. Every glance, every smile, every moment with you feels like the beginning of forever ❤️💫",
+        },
+        {
+          src: "images/IMG9.jpg",
+          memory:
+            "A day filled with laughter, blessings, and love — celebrating the little miracle who was already filling our hearts with joy 👶💖 Every moment from our baby shower was pure magic ✨",
+        },
+        {
+          src: "images/IMG12.jpg",
+          memory:
+            "Double trouble with their superhero dad 😎👶👶 His mini versions — copy, paste, and full of mischief 😂❤️ Two tiny kings and their forever hero 👑💫 The squad that stole my heart — times three 🥹💖",
+        },
+      ];
+      const ringData1 = [
+        {
+          src: "images/IMG1.jpg",
+          memory:
+            "This moment captured pure joy and laughter. The way your eyes sparkle when you smile reminds everyone why you're so special.",
+        },
+        {
+          src: "images/IMG1A.jpg",
+          memory:
+            "Adventure calls and you always answer! This photo represents your brave spirit and love for exploring new places.",
+        },
+        {
+          src: "images/IMG1B.jpeg",
+          memory:
+            "Nature brings out the best in you. Your appreciation for beautiful moments like this inspires everyone around you.",
+        },
+        {
+          src: "images/IMG1C.jpeg",
+          memory:
+            "Every sunset with you feels like a promise of brighter tomorrows. Your optimism lights up even the darkest days.",
+        },
+        {
+          src: "images/IMG2.jpeg",
+          memory:
+            "Your love for simple pleasures makes every ordinary moment extraordinary. This captures your beautiful perspective on life.",
+        },
+        {
+          src: "images/IMG2A.jpg",
+          memory:
+            "The way you find wonder in everyday things is magical. This moment shows your curious and playful spirit.",
+        },
+        {
+          src: "images/IMG2B.jpg",
+          memory:
+            "Your kindness creates ripples of joy wherever you go. This memory represents all the hearts you've touched.",
+        },
+        {
+          src: "images/IMG3.jpeg",
+          memory:
+            "Dancing through life with grace and humor - that's you! This captures your ability to find joy in every moment.",
+        },
+        {
+          src: "images/IMG3A.jpeg",
+          memory:
+            "Dancing through life with grace and humor - that's you! This captures your ability to find joy in every moment.",
+        },
+        {
+          src: "images/IMG4.jpeg",
+          memory:
+            "Dancing through life with grace and humor - that's you! This captures your ability to find joy in every moment.",
+        },
+        {
+          src: "images/IMG4A.jpeg",
+          memory:
+            "Dancing through life with grace and humor - that's you! This captures your ability to find joy in every moment.",
+        },
+        {
+          src: "images/IMG5.jpeg",
+          memory:
+            "Dancing through life with grace and humor - that's you! This captures your ability to find joy in every moment.",
+        },
+        {
+          src: "images/IMG5.jpg",
+          memory:
+            "Dancing through life with grace and humor - that's you! This captures your ability to find joy in every moment.",
+        },
+        {
+          src: "images/IMG6.jpg",
+          memory:
+            "Dancing through life with grace and humor - that's you! This captures your ability to find joy in every moment.",
+        },
+        {
+          src: "images/IMG7.jpg",
+          memory:
+            "Dancing through life with grace and humor - that's you! This captures your ability to find joy in every moment.",
+        },
+        {
+          src: "images/IMG8.jpg",
+          memory:
+            "Dancing through life with grace and humor - that's you! This captures your ability to find joy in every moment.",
+        },
+        {
+          src: "images/IMG9.jpg",
+          memory:
+            "Dancing through life with grace and humor - that's you! This captures your ability to find joy in every moment.",
+        },
+        {
+          src: "images/IMG10.jpg",
+          memory:
+            "Dancing through life with grace and humor - that's you! This captures your ability to find joy in every moment.",
+        },
+        {
+          src: "images/IMG11.jpg",
+          memory:
+            "Dancing through life with grace and humor - that's you! This captures your ability to find joy in every moment.",
+        },
+        {
+          src: "images/IMG12.jpg",
+          memory:
+            "Dancing through life with grace and humor - that's you! This captures your ability to find joy in every moment.",
+        },
+      ];
+      const ringData = [
+        { src: "images/IMG1.jpg" },
+        { src: "images/IMG1A.jpg" },
+        { src: "images/IMG1B.jpeg" },
+        { src: "images/IMG1C.jpeg" },
+        { src: "images/IMG2.jpeg" },
+        { src: "images/IMG2A.jpg" },
+        { src: "images/IMG2B.jpg" },
+        { src: "images/IMG3.jpeg" },
+        { src: "images/IMG3A.jpeg" },
+        { src: "images/IMG4.jpeg" },
+        { src: "images/IMG4A.jpeg" },
+        { src: "images/IMG5.jpeg" },
+        { src: "images/IMG5.jpg" },
+        { src: "images/IMG6.jpg" },
+        { src: "images/IMG7.jpg" },
+        { src: "images/IMG8.jpg" },
+        { src: "images/IMG9.jpg" },
+        { src: "images/IMG10.jpg" },
+        { src: "images/IMG11.jpg" },
+        { src: "images/IMG12.jpg" },
+      ];
+
+      // Current photo index
+      let currentPhotoIndex = 0;
+
+      // Photo Viewer functionality
+      const photoViewer = $("#photoViewer");
+      const photoCard = $("#photoCard");
+      const currentPhoto = $("#currentPhoto");
+      const memoryText = $("#memoryText");
+      const photoInfo = $("#photoInfo");
+      const viewerHint = $(".viewer-hint");
+      // Prevent image dragging
+      currentPhoto.setAttribute("draggable", "false");
+
+      // Preload photos to reduce jank when navigating
+      const preloadedPhotos = new Map();
+      function preloadPhotos(list) {
+        list.forEach((item) => {
+          const src = typeof item === "string" ? item : item.src;
+          if (!src || preloadedPhotos.has(src)) return;
+          const img = new Image();
+          img.src = src;
+          img.onload = () => preloadedPhotos.set(src, true);
+          img.onerror = () => preloadedPhotos.set(src, false);
+        });
+      }
+      preloadPhotos(photoData);
+
+      function openPhotoViewer(index = 0) {
+        currentPhotoIndex = index;
+        updatePhotoDisplay();
+        photoViewer.classList.add("show");
+        document.body.classList.add("modal-open");
+        // Reset flip state
+        photoCard.classList.remove("flipped");
+        // Update hint text depending on device
+        const isTouch =
+          "ontouchstart" in window || navigator.maxTouchPoints > 0;
+        if (viewerHint) {
+          viewerHint.textContent = isTouch
+            ? "Tap to flip • Swipe left/right to change"
+            : "Click to flip • Use ←/→ to change";
+        }
+      }
+
+      function closePhotoViewer() {
+        photoViewer.classList.remove("show");
+        photoCard.classList.remove("flipped");
+        document.body.classList.remove("modal-open");
+      }
+
+      function updatePhotoDisplay() {
+        const photo = photoData[currentPhotoIndex];
+        // Fade-out current image while the next one loads
+        currentPhoto.style.opacity = "0";
+        // Swap content
+        memoryText.textContent = photo.memory;
+        photoInfo.textContent = `Photo ${currentPhotoIndex + 1} of ${
+          photoData.length
+        } • Click to flip & read the memory`;
+        // Ensure onload sets visible; handle cached images too
+        currentPhoto.onload = () => {
+          currentPhoto.style.opacity = "1";
+        };
+        currentPhoto.src = photo.src;
+        if (currentPhoto.complete) {
+          // If already cached, onload may not fire
+          currentPhoto.style.opacity = "1";
+        }
+      }
+
+      function nextPhoto() {
+        currentPhotoIndex = (currentPhotoIndex + 1) % photoData.length;
+        updatePhotoDisplay();
+        // Reset flip state when changing photos
+        photoCard.classList.remove("flipped");
+      }
+
+      function prevPhoto() {
+        currentPhotoIndex =
+          (currentPhotoIndex - 1 + photoData.length) % photoData.length;
+        updatePhotoDisplay();
+        // Reset flip state when changing photos
+        photoCard.classList.remove("flipped");
+      }
+
+      // Event listeners for photo viewer
+      $("#closeViewer").addEventListener("click", closePhotoViewer);
+      $("#nextPhoto").addEventListener("click", nextPhoto);
+      $("#prevPhoto").addEventListener("click", prevPhoto);
+      // Prevent flip when a swipe just happened
+      let lastSwipeTime = 0;
+      $("#photoCard").addEventListener("click", () => {
+        if (Date.now() - lastSwipeTime < 300) return;
+        photoCard.classList.toggle("flipped");
+      });
+
+      // Touch swipe navigation for mobile
+      (function enableSwipe() {
+        const isTouch =
+          "ontouchstart" in window || navigator.maxTouchPoints > 0;
+        if (!isTouch) return;
+        let startX = 0,
+          startY = 0,
+          swiping = false;
+        photoCard.addEventListener(
+          "touchstart",
+          (e) => {
+            if (!photoViewer.classList.contains("show")) return;
+            const t = e.touches[0];
+            startX = t.clientX;
+            startY = t.clientY;
+            swiping = false;
+          },
+          { passive: true }
+        );
+        photoCard.addEventListener(
+          "touchmove",
+          (e) => {
+            if (!photoViewer.classList.contains("show")) return;
+            const t = e.touches[0];
+            const dx = t.clientX - startX;
+            const dy = t.clientY - startY;
+            if (!swiping) {
+              if (Math.abs(dx) > 12 && Math.abs(dx) > Math.abs(dy) * 1.2) {
+                swiping = true;
+              }
+            }
+            if (swiping) {
+              e.preventDefault();
+            }
+          },
+          { passive: false }
+        );
+        photoCard.addEventListener("touchend", (e) => {
+          if (!photoViewer.classList.contains("show")) return;
+          if (!swiping) return;
+          const t = e.changedTouches[0];
+          const dx = t.clientX - startX;
+          if (Math.abs(dx) > 48) {
+            if (dx < 0) nextPhoto();
+            else prevPhoto();
+            lastSwipeTime = Date.now();
+          }
+        });
+      })();
+
+      // Close viewer on escape key
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && photoViewer.classList.contains("show")) {
+          closePhotoViewer();
+        }
+        if (photoViewer.classList.contains("show")) {
+          if (e.key === "ArrowRight") nextPhoto();
+          if (e.key === "ArrowLeft") prevPhoto();
+          if (e.key === " ") {
+            e.preventDefault();
+            photoCard.classList.toggle("flipped");
+          }
         }
       });
-    }
 
-    function stopMusic() {
-      if (pendingStartOnPointerDown) {
-        window.removeEventListener('pointerdown', pendingStartOnPointerDown);
-        pendingStartOnPointerDown = null;
+      // Close viewer when clicking outside the photo container
+      photoViewer.addEventListener("click", (e) => {
+        if (e.target === photoViewer) {
+          closePhotoViewer();
+        }
+      });
+
+      // Gallery ring
+      function buildRing(photos) {
+        const ring = $("#ring");
+        ring.innerHTML = "";
+        // const n = Math.max(15, Math.min(photos.length, 20));
+        const n = photos.length;
+        const radius = Math.min(innerWidth, innerHeight) * 0.32 + 110;
+        for (let i = 0; i < n; i++) {
+          const img = document.createElement("img");
+          img.src = photos[i % photos.length].src || photos[i % photos.length];
+          img.style.setProperty("--angle", `${(360 / n) * i}deg`);
+          img.style.setProperty("--radius", `${radius}px`);
+          const angle = (360 / n) * i;
+          img.style.transform = `translate3d(-50%, -50%, 0) rotateY(${angle}deg) translateZ(${radius}px)`;
+
+          // Add click event to open photo viewer
+          img.addEventListener("click", (e) => {
+            e.stopPropagation();
+            openPhotoViewer(i % photos.length);
+          });
+
+          ring.appendChild(img);
+        }
       }
-      if (!isMusicOn && bgMusic.paused) { updateMusicToggle(); return; }
-      bgMusic.pause();
-      isMusicOn = false;
-      updateMusicToggle();
-    }
 
-    // Keep UI synced with actual audio state
-    bgMusic.addEventListener('play', () => { isMusicOn = true; updateMusicToggle(); });
-    bgMusic.addEventListener('pause', () => { isMusicOn = false; updateMusicToggle(); });
+      function showGallery() {
+        $("#gallery").classList.remove("hidden");
+        buildRing(ringData);
+        confetti.start(2000, 240);
+      }
 
-    $('#musicToggle').addEventListener('click', (e) => {
-      e.stopPropagation();
-      e.preventDefault();
-      isMusicOn = !isMusicOn;
-      isMusicOn ? startMusic() : stopMusic();
-    });
-    const viewVideoBtn = document.getElementById("viewVideo");
-const videoModal = document.getElementById("videoModal");
-const videoPlayer = document.getElementById("videoPlayer");
-const closeModal = document.getElementById("closeModal");
+      // View Photos button
+      $("#viewPhotos").addEventListener("click", () => {
+        openPhotoViewer(0);
+      });
+      $("#viewVideo").addEventListener("click", () => {
+        videoModal.classList.remove("hidden");
+        videoPlayer.src = videoData[0].src;
+        videoPlayer.play();
+      });
 
-// Open modal & play video
-viewVideoBtn.addEventListener("click", () => {
-  videoModal.classList.remove("hidden");
-  videoPlayer.play();
-});
+      $("#replay").addEventListener("click", () => {
+        // reset
+        $("#gallery").classList.add("hidden");
+        $("#chat").classList.add("hidden");
+        $("#greeting").classList.add("hidden");
+        $("#gift").classList.remove("open");
+        $("#giftStage").classList.remove("hidden");
+        $("#messages").innerHTML = "";
+        closePhotoViewer();
+        isGiftOpened = false;
+        // timeline
+        setTimeout(openGift, 600);
+        scrollTo({ top: 0, behavior: "smooth" });
+      });
 
-// Close modal & stop video
-closeModal.addEventListener("click", () => {
-  videoModal.classList.add("hidden");
-  videoPlayer.pause();
-  videoPlayer.currentTime = 0; // reset to start
-});
+      // Heart trail
+      function makeHeart(x, y) {
+        const h = document.createElement("div");
+        h.className = "heart";
+        const span = document.createElement("span");
+        span.textContent = "💗";
+        h.appendChild(span);
+        document.body.appendChild(h);
+        h.style.transform = `translate(${x}px, ${y}px)`;
+        h.style.opacity = "1";
+        span.style.animation = "floatHeart 900ms ease-out forwards";
+        setTimeout(() => h.remove(), 900);
+      }
 
-// Optional: close when clicking outside modal content
-videoModal.addEventListener("click", (e) => {
-  if (e.target === videoModal) {
-    videoModal.classList.add("hidden");
-    videoPlayer.pause();
-    videoPlayer.currentTime = 0;
-  }
-});
+      // Music functionality (removed audio element reference since no audio file provided)
+      let isMusicOn = false;
+      const bgMusic = $("#bgMusic");
+      bgMusic.preload = "auto";
+      bgMusic.volume = 0.7;
+      function updateMusicToggle() {
+        const btn = $("#musicToggle");
+        const isActuallyPlaying =
+          !bgMusic.paused && bgMusic.currentTime > 0 && !bgMusic.ended;
+        if (btn)
+          btn.textContent = "Music: " + (isActuallyPlaying ? "On" : "Off");
+      }
 
-  </script>
-</body>
+      let pendingStartOnPointerDown = null;
+      function startMusic() {
+        if (isMusicOn) return;
+        bgMusic
+          .play()
+          .then(() => {
+            isMusicOn = true;
+            updateMusicToggle();
+            if (pendingStartOnPointerDown) {
+              window.removeEventListener(
+                "pointerdown",
+                pendingStartOnPointerDown
+              );
+              pendingStartOnPointerDown = null;
+            }
+          })
+          .catch(() => {
+            if (!pendingStartOnPointerDown) {
+              pendingStartOnPointerDown = () => {
+                startMusic();
+              };
+              window.addEventListener(
+                "pointerdown",
+                pendingStartOnPointerDown,
+                { once: true }
+              );
+            }
+          });
+      }
 
+      function stopMusic() {
+        if (pendingStartOnPointerDown) {
+          window.removeEventListener("pointerdown", pendingStartOnPointerDown);
+          pendingStartOnPointerDown = null;
+        }
+        if (!isMusicOn && bgMusic.paused) {
+          updateMusicToggle();
+          return;
+        }
+        bgMusic.pause();
+        isMusicOn = false;
+        updateMusicToggle();
+      }
+
+      // Keep UI synced with actual audio state
+      bgMusic.addEventListener("play", () => {
+        isMusicOn = true;
+        updateMusicToggle();
+      });
+      bgMusic.addEventListener("pause", () => {
+        isMusicOn = false;
+        updateMusicToggle();
+      });
+
+      $("#musicToggle").addEventListener("click", (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        isMusicOn = !isMusicOn;
+        isMusicOn ? startMusic() : stopMusic();
+      });
+      // Video data array
+      const videoData = [
+        {
+          src: "videos/karthi.mp4",
+          title: "Karthik",
+        },
+        {
+          src: "videos/aruna.mp4",
+          title: "Kalai",
+        },
+        {
+          src: "videos/kalai.mp4",
+          title: "Kalai",
+        },
+        {
+          src: "videos/lmr.mp4",
+          title: "lmr",
+        },
+        {
+          src: "videos/kands.mp4",
+          title: "kands",
+        },
+        {
+          src: "videos/jm.mp4",
+          title: "jmuthu",
+        },
+        {
+          src: "videos/magathi.mp4",
+          title: "Kalai product",
+        },
+        {
+          src: "videos/dinesh.MOV",
+          title: "Dinesh",
+        },
+        // Add more videos as needed
+      ];
+
+      const videoModal = document.getElementById("videoModal");
+      const videoPlayer = document.getElementById("videoPlayer");
+      const videoButtons = document.getElementById("videoButtons");
+      const closeModal = document.getElementById("closeModal");
+
+      // Create video buttons
+      videoData.forEach((video, index) => {
+        const button = document.createElement("button");
+        button.className = "btn secondary video-btn";
+        button.textContent = video.title;
+        button.addEventListener("click", () => {
+          videoModal.classList.remove("hidden");
+          videoPlayer.src = video.src;
+          videoPlayer.play();
+        });
+        videoButtons.appendChild(button);
+      });
+
+      // Close modal & stop video
+      closeModal.addEventListener("click", () => {
+        videoModal.classList.add("hidden");
+        videoPlayer.pause();
+        videoPlayer.currentTime = 0; // reset to start
+      });
+
+      // Optional: close when clicking outside modal content
+      videoModal.addEventListener("click", (e) => {
+        if (e.target === videoModal) {
+          videoModal.classList.add("hidden");
+          videoPlayer.pause();
+          videoPlayer.currentTime = 0;
+        }
+      });
+    </script>
+  </body>
 </html>
